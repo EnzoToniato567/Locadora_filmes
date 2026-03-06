@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locadora - Home</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <h1>📽️ Locadora - Filmes disponíveis</h1>
+        <div class="espaco">
+            <a href="index.html">+ Cadastrar Novo</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="filtro">
+            <label for="genero">Filtrar por Gênero:</label>
+            <select id="genero" onchange="filtrarPorGenero()">
+                <option value="todos">Todos</option>
+                <option value="Ação">Ação</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Terror">Terror</option>
+                <option value="Ficção">Ficção Científica</option>
+                <option value="Romance">Romance</option>
+            </select>
+        </div>
+
+        <div id="cards-container" class="cards-container"></div>
+    </main>
+
+    <script src="script2.js"></script>
+
+</body>
+</html>

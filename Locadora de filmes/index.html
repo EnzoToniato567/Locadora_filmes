@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locadora - Filmes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📽️ Locadora - Cadastro de Filmes</h1>
+        <div class="espaco">
+            <a href="locadora.html">← Voltar</a>
+            <button onclick="abrirModal()">+ Novo Filme</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="filtro">
+            <label for="genero">Filtrar por Gênero:</label>
+            <select id="genero" onchange="filtrarPorGenero()">
+                <option value="todos">Todos</option>
+                <option value="Ação">Ação</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Terror">Terror</option>
+                <option value="Ficção">Ficção Científica</option>
+                <option value="Romance">Romance</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Gênero</th>
+                    <th>Ano</th>
+                    <th>Classificação</th>
+                    <th>Produtora</th>
+                    <th>Capa</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="dados"></tbody>
+        </table>
+    </main> 
+
+    <!-- Modal de Cadastro de Filmes -->
+    <div id="modalFilme" class="modal">
+        <form id="cadFilme" class="modal-content">
+            <h2>🎬 Novo Filme</h2>
+            
+            <input type="text" name="titulo" placeholder="Título do Filme" required>
+            
+            <select name="genero" required>
+                <option value="">Selecione o Gênero</option>
+                <option value="Ação">Ação</option>
+                <option value="Comédia">Comédia</option>
+                <option value="Drama">Drama</option>
+                <option value="Terror">Terror</option>
+                <option value="Ficção">Ficção Científica</option>
+                <option value="Romance">Romance</option>
+            </select>
+            
+            <input type="number" name="ano" placeholder="Ano" min="1900" max="2026" required>
+            
+            <select name="classificacao" required>
+                <option value="">Classificação</option>
+                <option value="Livre">Livre</option>
+                <option value="10+">10 anos</option>
+                <option value="12+">12 anos</option>
+                <option value="14+">14 anos</option>
+                <option value="16+">16 anos</option>
+                <option value="18+">18 anos</option>
+            </select>
+            
+            <input type="text" name="produtora" placeholder="Produtora" required>
+            <input type="url" name="capa" placeholder="URL da Capa">
+
+            <div class="modal-buttons">
+                <button type="submit">Salvar Filme</button>
+                <button type="button" onclick="fecharModal()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
