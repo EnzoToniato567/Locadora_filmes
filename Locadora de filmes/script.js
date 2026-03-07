@@ -1,4 +1,7 @@
 const modalFilme = document.getElementById("modalFilme");
+
+let indiceEditar = null;
+
 let filmes = JSON.parse(localStorage.getItem('filmes')) || [
     { 
         titulo: "Velozes e Furiosos 9", 
@@ -49,23 +52,44 @@ let filmes = JSON.parse(localStorage.getItem('filmes')) || [
         capa: "https://br.web.img3.acsta.net/c_310_420/pictures/16/02/03/19/11/303307.jpg" 
     }
 ];
-renderizarTabela()
+
+renderizarTabela();
 
 function salvarDadosLocalmente() {
-    localStorage.setItem("filmes", JSON.stringify(filmes))
+    localStorage.setItem("filmes", JSON.stringify(filmes));
 }
 
 function abrirModal() {
-    document.getElementById("modalFilme").style.display = "block";
+    modalFilme.style.display = "block";
 }
 
 function fecharModal() {
-    const excluirCampos = document.getElementById("modalFilme");
-    excluirCampos.style.display = "none";
+    modalFilme.style.display = "none";
     limparCampos();
 }
 
+function limparCampos() {
+    cadFilme.reset();
+}
+
+function editarModal(indice) {
+
+    abrirModal();
+
+    const filme = filmes[indice];
+
+    document.querySelector("input[name='titulo']").value = filme.titulo;
+    document.querySelector("select[name='genero']").value = filme.genero;
+    document.querySelector("input[name='ano']").value = filme.ano;
+    document.querySelector("select[name='classificacao']").value = filme.classificacao;
+    document.querySelector("input[name='produtora']").value = filme.produtora;
+    document.querySelector("input[name='capa']").value = filme.capa;
+
+    indiceEditar = indice;
+}
+
 const cadFilme = document.getElementById("cadFilme");
+
 cadFilme.addEventListener("submit", f => {
 
     f.preventDefault(); 
@@ -79,19 +103,26 @@ cadFilme.addEventListener("submit", f => {
         capa: cadFilme.capa.value
     }
 
-    filmes.push(obj);
+    if (indiceEditar != null) {
+        filmes[indiceEditar] = obj;
+        indiceEditar = null;
+    } else {
+        filmes.push(obj);
+    }
+
     salvarDadosLocalmente();
     renderizarTabela();
     fecharModal();
     cadFilme.reset();
-
 });
 
 function renderizarTabela() {
+
     const dados = document.getElementById("dados");
     dados.innerHTML = "";
 
     filmes.forEach((filme, exclu) => {
+
         dados.innerHTML += `
         <tr>
             <td>${filme.titulo}</td>
@@ -100,28 +131,43 @@ function renderizarTabela() {
             <td>${filme.classificacao}</td>
             <td>${filme.produtora}</td>
             <td><img src="${filme.capa || ''}" width="50" height="70"></td>
-            <td><button onclick="excluirFilme(${exclu})">Excluir</button></td>
+            <td>
+            <button onclick="excluirFilme(${exclu})">Excluir</button>
+            <button type="button" onclick="editarModal(${exclu})">Editar</button>
+            </td>
         </tr>
         `;
     });
+
 }
 
 function excluirFilme(indice) {
-    filmes.splice(indice, 1)
+
+    filmes.splice(indice, 1);
+
     salvarDadosLocalmente();
     renderizarTabela();
+
 }
 
 function filtrarPorGenero() {
+
     let genero = document.getElementById('genero').value;
+
     const dados = document.getElementById("dados");
+
     dados.innerHTML = "";
     
     if(genero === 'todos') {
+
         renderizarTabela();
+
     } else {
+
         let filtrados = filmes.filter(filme => filme.genero === genero);
+
         filtrados.forEach((filme, exclu) => {
+
             dados.innerHTML += `
             <tr>
                 <td>${filme.titulo}</td>
@@ -130,15 +176,12 @@ function filtrarPorGenero() {
                 <td>${filme.classificacao}</td>
                 <td>${filme.produtora}</td>
                 <td><img src="${filme.capa || ''}" width="50" height="70"></td>
-                <td><button onclick="excluirFilme(${exclu})">Excluir</button></td>
+                <td><button onclick="excluirFilme(${exclu})">Excluir</button>
+                <button type="button" onclick="editarModal(${exclu})">Editar</button></td
             </tr>
             `;
         });
-    }
-}
 
-function limparCampos() {
-    if(cadFilme) {
-        cadFilme.reset();
     }
+
 }
