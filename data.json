@@ -1,0 +1,27 @@
+{
+  "cartoons": [
+    {
+      "id": "c_teentitans",
+      "nome": "Os Jovens Titãs Clássico",
+      "produtora": "Warner Bros. Animation",
+      "temporadas": 5,
+      "capa": "",
+      "createdAt": 2003
+    }
+  ],
+  "episodes": {
+    "c_teentitans": {
+      "1": [
+        {
+          "id": "e_teentitans_s1e1",
+          "epNumber": 1,
+          "title": "Prova Final",
+          "iframe": "<iframe name=\"Player\" src=\"//redecanais.ooo/player3/server.php?server=RCServer10&subfolder=ondemand&vid=OSJVNSTASEP01\" frameborder=\"0\" height=\"400\" scrolling=\"no\" width=\"640\" allow=\"encrypted-media\" allowFullScreen></iframe>"
+        }
+      ]
+    }
+  },
+  "animes": [],
+  "animeEpisodes": {},
+  "mangas": []
+}
